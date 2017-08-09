@@ -1,14 +1,14 @@
-# lvm-volume-driver
+# Service Fabrik LVM Volume Driver
+
+## Description
 
 This volume driver plug-in implements the docker volume driver api. It provides volumes to docker images based on LVM logical volumes.
 
 There is one deviation from the API description at https://docs.docker.com/engine/extend/plugins_volume/: a volume may not be used by several containers and the attempt to do so may fail. The volume API demands that the number of mount operations is kept and the volume is only unmounted after the last matching unmount operation. This would require that the plug-in would have to keep some state persistently.
 
-Note: contains some modified lines from https://github.com/docker/docker (file utils.go for parsing the unix group file)
+## Limitations
 
-# TODO
-
-The goal is to make this list disappear asap. The getting started may refer to these features that have not been implemented yet.
+The goal is to make this list disappear. The getting started may refer to these features that have not been implemented yet.
 
 - [x] rename main to lvmvd
 - [x] check that the given volume group exists on startup
@@ -26,16 +26,24 @@ The goal is to make this list disappear asap. The getting started may refer to t
 Will not do
 - [ ] do some initial size management on the volume (not sure what that would look like)
 
-# Build
+## Requirements
 
-Sync the repository, cd into the src path and run the following commands:
+You should have [Golang](https://golang.org/doc/install) installed to run this project.
+
+Also, [Docker](https://docs.docker.com) needs to be installed if you want to use it locally. Follow [this](https://github.com/sap/service-fabrik-broker#installing-docker) to install Docker.
+
+## Installation
+
+First, sync the repository and cd into the src path. Then run the go build to build the code.
 
 ```
+git clone https://github.com/SAP/service-fabrik-lvm-volume-driver.git
+cd service-fabrik-lvm-volume-driver
 export GOPATH=`pwd`/..
 go build lvmvd.go
 ```
 
-# Getting Started
+## Getting Started
 
 The lvm volume driver expects that the lvm volume group has been created prior to running the volume driver. Follow these instructions for setting up the volume group:
 
@@ -71,7 +79,7 @@ This will start the lvm volume driver daemon serving volumnes from the `services
 
 Note: this is an example for volumes in sparse files. You can of course also provide a volume grouped backed by a physical disk.
 
-# Specify Volume Size
+### Specify Volume Size
 
 The lvm volume driver will create volumes with a size of 512MB by default. This can be changed using the `--default-size` command line parameter.
 
@@ -90,7 +98,7 @@ Alternatively one can specify `M` for megabytes. If no letter `G` or `M` is spec
 
 This should allow additional options for the future, e.g. something like `Text4` for the file system type ext4.
 
-# Tests
+### Tests
 
 There is a `runtest.sh` script which provides an integration test for the lvm volume driver.
 
@@ -105,9 +113,8 @@ Prerequisites / caveats:
 - The setup can be shaky as there are some side effects regarding lvm and loopback devices; especially after failed runs
 - lvm2 is required
 
-# Reference
 
-## Commands for working with sparse files and LVM
+### Commands for working with sparse files and LVM
 
 Create logical volume:
 
@@ -129,7 +136,7 @@ Delete logical volume
 
 `lvremove /dev/mapper/service-myvolume`
 
-## Testing
+### Testing
 
 Create volume:
 
@@ -154,6 +161,10 @@ Unmount
 starting the program
 
 ./main --listener=http --default-size=1G --volume-group-name=services-vg --mount-root=/var/volume/mnt-services-vg
+
+## How to obtain support
+ 
+If you need any support, have any question or have found a bug, please report it in the [GitHub bug tracking system](https://github.com/sap/service-fabrik-lvm-volume-driver/issues). We shall get back to you.
 
 ## LICENSE
 

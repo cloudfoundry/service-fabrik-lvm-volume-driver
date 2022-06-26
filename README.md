@@ -30,14 +30,14 @@ Will not do
 
 You should have [Golang](https://golang.org/doc/install) installed to run this project.
 
-Also, [Docker](https://docs.docker.com) needs to be installed if you want to use it locally. Follow [this](https://github.com/sap/service-fabrik-broker#installing-docker) to install Docker.
+Also, [Docker](https://docs.docker.com) needs to be installed if you want to use it locally. Follow [this](https://github.com/cloudfoundry/service-fabrik-broker#installing-docker) to install Docker.
 
 ## Installation
 
 First, sync the repository and cd into the src path. Then run the go build to build the code.
 
 ```
-git clone https://github.com/SAP/service-fabrik-lvm-volume-driver.git
+git clone https://github.com/cloudfoundry/service-fabrik-lvm-volume-driver.git
 cd service-fabrik-lvm-volume-driver
 export GOPATH=`pwd`/..
 go build lvmvd.go
@@ -164,7 +164,7 @@ starting the program
 
 ## How to obtain support
  
-If you need any support, have any question or have found a bug, please report it in the [GitHub bug tracking system](https://github.com/sap/service-fabrik-lvm-volume-driver/issues). We shall get back to you.
+If you need any support, have any question or have found a bug, please report it in the [GitHub bug tracking system](https://github.com/cloudfoundry/service-fabrik-lvm-volume-driver/issues). We shall get back to you.
 
 ## LICENSE
 
